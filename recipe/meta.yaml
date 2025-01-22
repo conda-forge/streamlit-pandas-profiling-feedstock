@@ -6,22 +6,22 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/streamlit_pandas_profiling-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/streamlit_pandas_profiling-{{ version }}.tar.gz
   sha256: 6719cf2cfd682b59470d90aa09b4529a6622d915cef4faa3e88f85c00b7faf79
 
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
-  number: 0
+  number: 1
 
 requirements:
   host:
     - pip
-    - python >=3.6
+    - python {{ python_min }}
     - streamlit >=0.63
   run:
     - pandas-profiling
-    - python >=3.6
+    - python >={{ python_min }}
     - streamlit >=0.63
 
 test:
@@ -31,6 +31,7 @@ test:
     - pip check
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://share.streamlit.io/okld/streamlit-gallery/main?p=pandas-profiling
